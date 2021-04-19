@@ -1,0 +1,38 @@
+function yes (input) {
+
+    function cal(num) {
+        var regex = new RegExp(/^[0-9]*[1-9][0-9]*$/);
+        var i = 2;
+        var handle = num;
+        var arr = new Array();
+        while(i<handle){
+            var result = handle/i;
+            if(regex.test(result)){ 
+                arr.push(i);
+                i=2;
+                handle=result;
+            }else{
+                i++;
+            }
+            if(i == handle-1){
+                arr.push(handle)
+                break;
+            }
+        }
+
+        var str = String();
+        for(i=0;i<arr.length;i++){
+            str += arr[i];
+        }
+
+        var arr = str.split("");
+        return arr;
+    }
+
+    var result = [];
+    for(var i = 0;i < input.length;i++){
+        result = result.concat(cal(input[i]));
+    }
+    return result;
+}
+console.log(yes([4,6,8]));
