@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>JD首页</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //代码初始化
+            var size = $(".img li").length;
+            for(var i = 1;i <= size;i++){
+                var li = "<li>" +i+ "</li>";
+                $(".num").append(li);
+            }
+
+            // 手动控制轮播
+            $(".img li").eq(0).show();
+            $(".num li").eq(0).addClass("active");
+
+            $(".num li").mouseover(function(){
+                $(this).addClass("active").siblings().removeClass("active");
+
+                var index  = $(this).index();
+                //alert(index);
+
+                i = index;
+                $(".img li").eq(index).stop().fadeIn(300).siblings().stop().fadeOut(300);
+            })
+
+
+            //自动控制轮播
+            var i = 0;
+            var t = setInterval(moveRight,2000);
+            function moveRight(){
+                i++;
+                if(i == size){
+                    i = 0;
+                }
+                $(".img li").eq(i).fadeIn(300).siblings().fadeOut(300);
+                $(".num li").eq(i).addClass("active").siblings().removeClass("active");
+            }
+
+            function moveLeft(){
+                i--;
+                if(i == -1){
+                    i = size - 1;
+                }
+                $(".img li").eq(i).fadeIn(300).siblings().fadeOut(300);
+                $(".num li").eq(i).addClass("active").siblings().removeClass("active");
+            }
+            //定时器的控制
+            $(".out").hover(function(){
+                clearInterval(t);
+            },function(){
+                t = setInterval(moveRight,2000);
+            })
+
+
+            //左右按钮控制轮播
+            $(".out .leftarrow").click(function(){
+                moveLeft();
+            })
+
+            $(".out .rightarrow").click(function(){
+                moveRight();
+            })
+
+
+            //daohang
+            $(".nav .list li").hover(function(){
+              $(this).find(".down").stop().slideDown()
+            },function(){
+              $(this).find(".down").stop().slideUp()
+            })
+        })
+    </script>
+</head>
+<body>
+  <div class="nav">
+    <ul class="list">
+      <li><a href="#">你好，请登录</a></li>
+      <li><a href="#">免费注册</a></li>
+      <li>
+        <a href="#">我的订单 ∨</a>
+        <div class="down">
+          <a href="#">未支付订单</a>
+          <a href="#">待处理订单</a>
+          <a href="#">已完成订单</a>
+          <a href="#">全部订单</a>
+        </div>
+      </li>
+      <li>
+        <a href="#">我的京东 ∨</a>
+        <div class="down">
+          <a href="#">返修退换货</a>
+          <a href="#">降价商品</a>
+          <a href="#">消息</a>
+          <a href="#">我的问答</a>
+          <a href="#">我的关注</a>
+        </div>
+      </li>
+      <li><a href="#">京东会员</a></li>
+      <li><a href="#">企业采购</a></li>
+      <li>
+        <a href="#">客户服务 ∨</a>
+        <div class="down">
+          <a href="#">帮助中心</a>
+          <a href="#">在线客服</a>
+          <a href="#">电话客服</a>
+          <a href="#">金融咨询</a>
+        </div>
+      </li>
+      <li><a href="#">网站导航</a></li>
+    </ul>
+  </div>
+
+  <div class="sidebar">
+
+      <img class="logo" src="img/jd.jpg">
+
+  	<ul class="topmenu">
+  		<div class="toptitle">全部商品分类</div>
+
+  			<li><a href="#">家用电器</a><span></span>
+  			<div class="submenu">
+  				<div class="leftdiv">
+  				<dl>
+  					<dt><a href="#">电视</a></dt>
+  					<dd>
+  						<a href="#">合资品牌</a> <a href="#">国产品牌</a> <a href="#">互联网品牌</a> 
+  					</dd>
+  				</dl>
+  				<dl>
+  					<dt><a href="#">空调</a></dt>
+  					<dd>
+  						<a href="#">壁挂式空调</a> <a href="#">柜式空调</a> <a href="#">中央空调</a> <a href="#">空调配件</a>
+  					</dd>
+  				</dl>
+  				<dl>
+  					<dt><a href="#">洗衣机</a></dt>
+  					<dd>
+  						<a href="#">滚筒洗衣机</a> <a href="#">洗烘一体机</a> <a href="#">波轮洗衣机</a> <a href="#">迷你洗衣机</a> <a href="#">洗衣机配件</a>
+  					</dd>
+  				</dl>
+  				<dl>
+  					<dt><a href="#">冰箱</a></dt>
+  					<dd>
+  						<a href="#">多门</a> <a href="#">对开门</a> <a href="#">三门</a> <a href="#">双门</a> <a href="#">冷柜、冰吧</a> <a href="#">酒柜</a> <a href="#">冰箱配件</a>
+  					</dd>
+  				</dl>
+  				<dl>
+  					<dt><a href="#">厨卫大电</a></dt>
+  					<dd>
+  						<a href="#">油烟机</a> <a href="#">燃气灶</a> <a href="#">烟灶套装</a> <a href="#">消毒柜</a> <a href="#">洗碗机</a> <a href="#">电热水器</a> <a href="#">燃气热水器</a> <a href="#">嵌入式厨电</a>
+  					</dd>
+  				</dl>
+  				<dl>
+  					<dt><a href="#">厨房小电</a></dt>
+  					<dd>
+  						<a href="#">电饭煲</a> <a href="#">微波炉</a> <a href="#">电烤箱</a> <a href="#">电磁炉</a> <a href="#">电压力锅</a> <a href="#">豆浆机</a> <a href="#">咖啡机</a> <a href="#">面包机</a> <a href="#">榨汁机</a> <a href="#">料理机</a> <a href="#">电饼档</a> <a href="#">养生壶、煎药壶</a> <a href="#">酸奶机</a> <a href="#">煮蛋器</a> <a href="#">电水壶、热水瓶</a> <a href="#">电炖锅</a> <a href="#">多用途锅</a> <a href="#">电烧烤炉</a> <a href="#">电热饭盒</a> <a href="#">其它厨房电器</a>
+  					</dd>
+  				</dl>
+  				<dl>
+  					<dt><a href="#">生活电器</a></dt>
+  					<dd>
+  						<a href="#">取暖电器</a> <a href="#">吸尘器</a> <a href="#">净化器</a> <a href="#">扫地机器人</a> <a href="#">加湿器</a> <a href="#">挂烫机、熨斗</a> <a href="#">电风扇</a> <a href="#">冷风扇</a> <a href="#">插座</a> <a href="#">电话机</a> <a href="#">饮水机</a> <a href="#">净水器</a> <a href="#">除湿机</a> <a href="#">干衣机</a> <a href="#">清洁机</a> <a href="#">收录、音机</a> <a href="#">其它生活电器</a> <a href="#">生活电器配件</a>
+  					</dd>
+  				</dl>
+  				<dl>
+  					<dt><a href="#">个护健康</a></dt>
+  					<dd>
+  						<a href="#">剃须刀</a> <a href="#">口腔护理</a> <a href="#">电吹风</a> <a href="#">美容器</a> <a href="#">卷、直发器</a> <a href="#">理发器</a> <a href="#">剃、脱毛器</a> <a href="#">足浴盆</a> <a href="#">健康秤、厨房秤</a> <a href="#">按摩器</a> <a href="#">按摩椅</a> <a href="#">计步器、脂肪检测仪</a> <a href="#">其它健康电器</a>
+  					</dd>
+  				</dl>
+  				<dl>
+  					<dt><a href="#">家庭影音</a></dt>
+  					<dd>
+  						<a href="#">家庭影院</a> <a href="#">迷你音响</a> <a href="#">DVD</a> <a href="#">电视影音配件</a>
+  					</dd>
+  				</dl>
+  				<dl>
+  					<dt><a href="#">进口电器</a></dt>
+  					<dd>
+  						<a href="#">进口电器</a>
+  					</dd>
+  				</dl>
+
+
+  				</div>
+  				<div class="rightdiv">
+                      <dl>
+                          <dd>
+                              <a href="http://sale.jd.com/act/1XDZ6ShE5M7tTrl.html">
+                                  <img src="http://img30.360buyimg.com/erpVCAare/g16/M00/0B/1B/rBEbRlOCFcoIAAAAAAArMNB2tlkAACTlwDgVG8AACtI514.jpg"
+                                      width="194" height="70" title="\家电">
+                              </a>
+                          </dd>
+                          <dd>
+                              <a href="http://sale.jd.com/act/v8kJIaPmsMGuebpH.html">
+                                  <img src="http://img30.360buyimg.com/erpVCAare/g16/M00/0B/19/rBEbRlOAiHUIAAAAAAAx8X2c6oIAACTCAP56A4AADIJ112.jpg"
+                                      width="194" height="70" title="小家电--三请聚宝盆">
+                              </a>
+                          </dd>
+                      </dl>
+                      <dl>
+                          <dt>推荐品牌</dt>
+                          <dd>
+                              <a href="#">美的官方旗舰店</a>
+                          </dd>
+                          <dd>
+                              <a href="#">苏泊尔旗舰店</a>
+                          </dd>
+                          <dd>
+                              <a href="#">九阳旗舰店</a>
+                          </dd>
+                          <dd>
+                              <a href="#">东菱旗舰店</a>
+                          </dd>
+                          <dd>
+                              <a href="#">海尔统帅旗舰店</a>
+                          </dd>
+                          <dd>
+                              <a href="#">小熊旗舰店</a>
+                          </dd>
+                      </dl>
+                  </div>
+  			</div>
+  		</li>
+
+  		<li><a href="#">手机|运营商|数码</a></li>
+
+  		<li><a href="#">电脑办公</a></li>
+
+  		<li><a href="#">家居|家具|家装|厨具</a></li>
+
+  		<li><a href="#">男装|女装|童装|内衣</a></li>
+
+  		<li><a href="#">个护化妆|清洁用品|宠物</a></li>
+
+  		<li><a href="#">鞋靴|箱包|珠宝|奢侈品</a></li>
+
+  		<li><a href="#">运动|户外|钟表</a></li>
+
+  		<li><a href="#">汽车|汽车用品</a></li>
+
+  		<li><a href="#">母婴|玩具乐器</a></li>
+
+  		<li><a href="#">食品|酒类|生鲜|特产</a></li>
+
+  		<li><a href="#">医药保健</a></li>
+
+  		<li><a href="#">图书|音像|电子书</a></li>
+
+  		<li><a href="#">机票|酒店|旅游|生活</a></li>
+
+  		<li><a href="#">理财|众筹|白条|保险</a></li>
+  	</ul>
+  </div>
+  
+  <div class="out">
+      <ul class="img">
+          <li><a href="#"><img src="img/pic1.jpg" alt=""></a></li>
+          <li><a href="#"><img src="img/pic2.jpg" alt=""></a></li>
+          <li><a href="#"><img src="img/pic3.jpg" alt=""></a></li>
+          <li><a href="#"><img src="img/pic4.jpg" alt=""></a></li>
+          <li><a href="#"><img src="img/pic5.jpg" alt=""></a></li>
+      </ul>
+
+      <ul class="num">
+
+      </ul>
+
+      <div class="leftarrow btn"><</div>
+      <div class="rightarrow btn">></div>
+  </div>
+</body>
+</html>
